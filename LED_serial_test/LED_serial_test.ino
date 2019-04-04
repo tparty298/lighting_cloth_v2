@@ -1,3 +1,4 @@
+#include <MsTimer2.h>
 #include <Adafruit_NeoPixel.h>
 #define PININIT        13
 #define NUMPIXELS      296
@@ -5,137 +6,85 @@
 
 Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
+//general variable////////////////
 int loopCount=0;
-//int tmp=-1;
-int tmp[4];
-int get255;
-int get254;
-int get253;
-int sIn;
-int colorR[NUMPIXELS];
-int colorG[NUMPIXELS];
-int colorB[NUMPIXELS];
-int r=0,g=0,b=0;
-int R[5];
-int G[5];
-int B[5];
+int h_in=0;
+int h_LED=0;
+int color_LED[3]={0,0,0};
+float beat_sec;
+/////////////////////////////////
+
+//change variable///////////////
+int bpm=128;
+////////////////////////////////
 
 void setup() {
-  // put your setup code here, to run once:
+  //general setup///////////////////////////////////////////////////////////
   Serial.begin(9600);
-  //p=Adafruit_NeoPixel(NUMPIXELS, PININIT+3, NEO_GRB + NEO_KHZ800);
-  //p[0]=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
+  //////////////////////////////////////////////////////////////////////////
+
+  //LED tape setup//////////////////////////////////////////////////////////
   p.begin();
   for(int i=0;i<NUMPIXELS;i++){
     p.setPixelColor(i, p.Color(0,0,0));
   }
   p.show();
   p.setBrightness(BRIGHTNESS);
+  /////////////////////////////////////////////////////////////////////////
 
-  //RGBinit
-  for(int i=0;i<5;i++){
-    R[i]=0;
-    G[i]=0;
-    B[i]=0;
-  }
+  //Music setup/////////////////////////////////
+  beat_sec=60000.0/float(bpm);
+  //////////////////////////////////////////////
+
+  //MsTimer setup//////////////////////////////////////////////////////////
+  MsTimer2::set(100,timerFire);//fire per 100ms timerFire function
+  MsTimer2::start();
+  /////////////////////////////////////////////////////////////////////////
+
 }
 
-void loop() {
-  /*
-  tmp=Serial.read();
-  Serial.println(tmp);
-  */
-  Serial.println("here");
-  do{
-    get255=Serial.read();
-  }while(get255!=255);
-  tmp[0]=Serial.read();
-  for(int i=1;i<5;i++){
-    R[i-1]=R[i];
-  }
-  R[0]=tmp[0];
-  for(int i=1;i<5;i++){
-    r+=R[i];
-  }
-  r/=5;
-  
-  do{
-    get254=Serial.read();
-  }while(get254!=254);
-  tmp[1]=Serial.read();
-  for(int i=1;i<5;i++){
-    G[i-1]=G[i];
-  }
-  G[0]=tmp[1];
-  for(int i=1;i<5;i++){
-    g+=G[i];
-  }
-  g/=5;
+void loop() { 
+   //Serial///////////////////////
+    Serial.println("start");
+    h_in=Serial.read();
+    Serial.println(h_in);
+   ///////////////////////////////
 
-  
-  do{
-    get253=Serial.read();
-  }while(get253!=253);
-  tmp[2]=Serial.read();
-  for(int i=1;i<5;i++){
-    B[i-1]=B[i];
-  }
-  B[0]=tmp[2];
-  for(int i=1;i<5;i++){
-    b+=B[i];
-  }
-  b/=5;
-
-  
-  Serial.println(tmp[0]);
-  Serial.println(tmp[1]);
-  Serial.println(tmp[2]);
-  for(int j=0;j<NUMPIXELS;j++){
-    p.setPixelColor(j, p.Color(tmp[0],tmp[1],tmp[2]));
-  }
-  p.show();
-  delay(50);
-  /*
-  Serial.println("read");
-  do{
-    tmp=Serial.read();
-  }while(tmp!=255);
-  //Serial.write(254);
-
-  
-  do{
-    tmp=Serial.read();
-  }while(tmp<0||tmp>250);
-  r=tmp;
-
-  do{
-    tmp=Serial.read();
-  }while(tmp<0||tmp>250);
-  g=tmp;
-  
-  do{
-    tmp=Serial.read();
-  }while(tmp<0||tmp>250);
-  b=tmp;
-
-  for(int j=0;j<NUMPIXELS;j++){
-    p.setPixelColor(j, p.Color(r,g,b));
-  }
-  p.show();
-  Serial.println(r);
-  Serial.println(g);
-  Serial.println(b);
-*/
-
+   //color set/////////////////
+   h_LED=h_in*10;//h_in is 0~36, h_LED is 0~360
+   color_LED[0]=HSV_to_R(h_LED,255,255);//s,v=0~255
+   color_LED[1]=HSV_to_G(h_LED,255,255);//s,v=0~255
+   color_LED[2]=HSV_to_B(h_LED,255,255);//s,v=0~255
+   Serial.println("to RGB");
+   Serial.println(color_LED[0]);
+   Serial.println(color_LED[1]);
+   Serial.println(color_LED[2]);
+   //////////////////////////////
+   
+   //Light Cloth//////////////////
+   allLightFlash(color_LED[0],color_LED[1], color_LED[2]);
+   //////////////////////////////
   
   loopCount++;
 }
 
-/*   
-    if(sIn==1){
-      for(int i=0;i<NUMPIXELS;i++){
-        p.setPixelColor(i, p.Color(255,0,0));
-      }
-      p.show();
+void timerFire() {//per beat_sec ms
+   
+}
+
+void allLightFlash(int r_in, int g_in, int b_in){ //for test
+  for(int j=0;j<NUMPIXELS;j++){
+      p.setPixelColor(j, p.Color(r_in,g_in,b_in));
     }
+    p.show();
+    
+}
+/*
+ * for(int j=0;j<NUMPIXELS;j++){
+      p.setPixelColor(j, p.Color(tmp[0],tmp[1],tmp[2]));
+    }
+    p.show();
  */
+
+
+

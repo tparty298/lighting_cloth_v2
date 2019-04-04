@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 using namespace std;
 
 #define NUM_LED 296
@@ -25,7 +26,12 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
         ofSerial serialArduino; // Arduinoのシリアル通信用
-        ofColor sendColor[NUM_LED];
-        Byte get;
-        //int tmp=-1;
+    
+        //GUI関係の変数////////////////
+        ofxPanel gui;
+        ofxIntSlider hue;
+        /////////////////////////////
+    
+        //色関係の変数/////////////////
+        /////////////////////////////
 };

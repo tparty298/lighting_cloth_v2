@@ -6,37 +6,31 @@ int tmp=-1;
 void ofApp::setup(){
     //GUI
     ofBackground(0,0,0);
+    gui.setup();
+    gui.add(hue.setup("hue",30,0,36));
     // 描画系設定
-    //ofSetVerticalSync(true);
-    //ofSetFrameRate(60);
+    ofSetVerticalSync(true);
+    ofSetFrameRate(60);
     // シリアル通信
     serialArduino.listDevices();
-    //serialArduino.setup(0, 9600);
-    //serialArduino.setup("/dev/tty.usbmodem14441", 9600);
     if(!serialArduino.setup(1, 9600)) {
         // log and error and leave
         ofLogError() << "could not open serial port - listing serial devices";
         serialArduino.listDevices();
         OF_EXIT_APP(0);
     }
+    //色設定
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    //Arduinoにフレームの始まりを伝える
-
-    serialArduino.writeByte(Byte(255));
-    serialArduino.writeByte(Byte(50));//r
-    serialArduino.writeByte(Byte(254));
-    serialArduino.writeByte(Byte(250));//g
-    serialArduino.writeByte(Byte(253));
-    serialArduino.writeByte(Byte(100));//b
-    
+    serialArduino.writeByte(Byte(hue));//hue
+    std::cout<<hue<<std::endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    gui.draw();
 }
 
 //--------------------------------------------------------------
