@@ -504,6 +504,388 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>660AF83ED1039B30B333168F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxProcessFFT.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxProcessFFT.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>90A3947FE0360351783A9534</key>
+			<dict>
+				<key>fileRef</key>
+				<string>1DB1725807886421452E3152</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>1DB1725807886421452E3152</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxProcessFFT.cpp</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxProcessFFT.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>2AE5D38945E51E637A084286</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFftw.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFftw.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>F99EEC3CEF6360DF8552E8F6</key>
+			<dict>
+				<key>fileRef</key>
+				<string>A6AABBF790CA6555CFE61593</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>A6AABBF790CA6555CFE61593</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFftw.cpp</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFftw.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>FA3035CB75A06B954FD81DD9</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFftBasic.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFftBasic.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>7557B50839B0F374D5EE7F20</key>
+			<dict>
+				<key>fileRef</key>
+				<string>9B50CFB460E98919D28EDA41</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>9B50CFB460E98919D28EDA41</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFftBasic.cpp</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFftBasic.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>6EB8FF9B1719552E7A9E2791</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFft.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFft.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>2EBCB22D1697582984CAD84F</key>
+			<dict>
+				<key>fileRef</key>
+				<string>8F3020D52EEFE10E17D3B92F</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>8F3020D52EEFE10E17D3B92F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxFft.cpp</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxFft.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>B7F8F9E0494B591EA76E257D</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxEasyFft.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxEasyFft.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>14D2E3EE0233F84B1B324DD9</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>3A088D2D6A43CD61CDF6CA1F</string>
+					<string>B7F8F9E0494B591EA76E257D</string>
+					<string>8F3020D52EEFE10E17D3B92F</string>
+					<string>6EB8FF9B1719552E7A9E2791</string>
+					<string>9B50CFB460E98919D28EDA41</string>
+					<string>FA3035CB75A06B954FD81DD9</string>
+					<string>A6AABBF790CA6555CFE61593</string>
+					<string>2AE5D38945E51E637A084286</string>
+					<string>1DB1725807886421452E3152</string>
+					<string>660AF83ED1039B30B333168F</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>9C31B6167A43F055763CE633</key>
+			<dict>
+				<key>fileRef</key>
+				<string>3A088D2D6A43CD61CDF6CA1F</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>3A088D2D6A43CD61CDF6CA1F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxEasyFft.cpp</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src/ofxEasyFft.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>94D62AD1ED6AD897B7323EB0</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>kiss_fftr.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss/kiss_fftr.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>503AFB9DAC0CE94A1245BD9B</key>
+			<dict>
+				<key>fileRef</key>
+				<string>963BB60055BC244DAB74682C</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>963BB60055BC244DAB74682C</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.c</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>kiss_fftr.c</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss/kiss_fftr.c</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>E2C1F7A4856FF2C663206261</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>kiss_fft.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss/kiss_fft.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>F4D30A40CF3A76EB5FA81A6F</key>
+			<dict>
+				<key>fileRef</key>
+				<string>42169BC1BAD0A546112E47A6</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>42169BC1BAD0A546112E47A6</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.c</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>kiss_fft.c</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss/kiss_fft.c</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>A2C4D2900B6384FDE5E77208</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>2BB66C5B24BD6386A1150BAB</string>
+					<string>42169BC1BAD0A546112E47A6</string>
+					<string>E2C1F7A4856FF2C663206261</string>
+					<string>963BB60055BC244DAB74682C</string>
+					<string>94D62AD1ED6AD897B7323EB0</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>kiss</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>2BB66C5B24BD6386A1150BAB</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>_kiss_fft_guts.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss/_kiss_fft_guts.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>F2022DF37286FECB8B9BA5B2</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>6D05D50181E03C405C2EEB33</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>include</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>A0535D33570F65575182C18F</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>F2022DF37286FECB8B9BA5B2</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>fftw</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>72C89FAFAC11F96856792042</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>A0535D33570F65575182C18F</string>
+					<string>A2C4D2900B6384FDE5E77208</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>libs</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>BBC2B4228932C2AACC6701CF</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>72C89FAFAC11F96856792042</string>
+					<string>14D2E3EE0233F84B1B324DD9</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxFft</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>6D05D50181E03C405C2EEB33</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>fftw3.h</string>
+				<key>path</key>
+				<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include/fftw3.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>6948EE371B920CB800B5AC1A</key>
 			<dict>
 				<key>children</key>
@@ -669,6 +1051,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>
@@ -711,6 +1102,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>
@@ -748,6 +1148,7 @@ fi
 			<dict>
 				<key>children</key>
 				<array>
+					<string>BBC2B4228932C2AACC6701CF</string>
 					<string>480A780D8D0308AE4A368801</string>
 					<string>30CFBB86EC7BF2803432D264</string>
 				</array>
@@ -3515,6 +3916,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>
@@ -3577,6 +3987,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>
@@ -3603,6 +4022,13 @@ fi
 				<array>
 					<string>E4B69E200A3A1BDC003C02F2</string>
 					<string>E4B69E210A3A1BDC003C02F2</string>
+					<string>F4D30A40CF3A76EB5FA81A6F</string>
+					<string>503AFB9DAC0CE94A1245BD9B</string>
+					<string>9C31B6167A43F055763CE633</string>
+					<string>2EBCB22D1697582984CAD84F</string>
+					<string>7557B50839B0F374D5EE7F20</string>
+					<string>F99EEC3CEF6360DF8552E8F6</string>
+					<string>90A3947FE0360351783A9534</string>
 					<string>CEEF484E0F0BC215FD07EC62</string>
 					<string>265271471EAAA13184884FFB</string>
 					<string>2123177A17979ED24011453C</string>
@@ -3713,6 +4139,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>
@@ -3766,6 +4201,15 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>src</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/include</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/osx</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/fftw/lib/win32</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/libs/kiss</string>
+						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxFft/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxGui/src</string>
 						<string>../../../../../../Applications/of_v0.10.1_osx_release/addons/ofxSimpleSerial/src</string>
 					</array>

@@ -1,2 +1,3 @@
+ofxFft
 ofxGui
 ofxSimpleSerial

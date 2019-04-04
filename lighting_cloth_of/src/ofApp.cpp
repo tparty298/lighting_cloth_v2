@@ -4,10 +4,19 @@
 int tmp=-1;
 //--------------------------------------------------------------
 void ofApp::setup(){
+    //音関連
+    fft.setup(pow(2.0,12.0));
+    //画像関連
+    TParty.load("images/TParty.png");
+    cloth.load("images/cloth.png");
+    cloth_image_positon.set(300,50);//cloth.pngの位置
+    cloth_image_size.set(350,350*cloth_image_aspect_ratio);//cloth.pngのサイズ
     //GUI
     ofBackground(0,0,0);
     gui.setup();
-    gui.add(hue.setup("hue",30,0,36));
+    gui.add(hue.setup("hue",1,1,359));
+    gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
+    fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
@@ -24,13 +33,47 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    serialArduino.writeByte(Byte(hue));//hue
-    std::cout<<hue<<std::endl;
+    //音関連////////////////////////
+    fft.update();
+    ///////////////////////////////
+    
+    //色の値/////////////////////////
+    hue_send=ofMap(hue,0,359,0,100);
+    ////////////////////////////////
+    
+    //シリアル通信////////////////////
+    serialArduino.writeByte(Byte(hue_send));//hue
+    ////////////////////////////////
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    gui.draw();
+    //音関連///////////////////////////
+    vector<float> buffer;
+    buffer=fft.getBins();
+    ofNoFill();
+    ofSetLineWidth(2.0);
+    ofBeginShape();
+    for(int i=0;i<buffer.size();i++){
+        buffer[i]*=sound_volume_ratio;
+        float x=ofMap(i,0,buffer.size(),0,ofGetWidth());
+        float y=ofMap(buffer[i],0,1,ofGetHeight(),0);
+        ofVertex(x, y);
+    }
+    ofEndShape();
+    ///////////////////////////////////
+    
+    //GUI/////////////////////////////
+    TParty.draw(1025,25,150,120);
+    cloth.draw(cloth_image_positon.x,cloth_image_positon.y,cloth_image_size.x,cloth_image_size.y);
+    gui.draw();//これはGUIの最後に
+    ///////////////////////////////////
+    
+    
+    //余計だけど入れるところ/////////////
+    string msg = ofToString((int) ofGetFrameRate()) + " fps";
+    ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
+    /////////////////////////////////
 }
 
 //--------------------------------------------------------------

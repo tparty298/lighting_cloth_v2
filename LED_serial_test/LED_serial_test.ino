@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 #define PININIT        13
 #define NUMPIXELS      296
-#define BRIGHTNESS     255
+#define BRIGHTNESS     10
 
 Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
@@ -37,54 +37,41 @@ void setup() {
   //////////////////////////////////////////////
 
   //MsTimer setup//////////////////////////////////////////////////////////
-  MsTimer2::set(100,timerFire);//fire per 100ms timerFire function
-  MsTimer2::start();
   /////////////////////////////////////////////////////////////////////////
 
 }
 
 void loop() { 
    //Serial///////////////////////
-    Serial.println("start");
-    h_in=Serial.read();
-    Serial.println(h_in);
+    //Serial.println("start");
+    if(Serial.available()>0){
+      h_in=Serial.read();
+      //Serial.println(h_in);
+    }
    ///////////////////////////////
 
    //color set/////////////////
-   h_LED=h_in*10;//h_in is 0~36, h_LED is 0~360
+   h_LED=int(h_in*3.6);//h_in is 0~100, h_LED is 0~360
+   Serial.println(h_LED);
    color_LED[0]=HSV_to_R(h_LED,255,255);//s,v=0~255
    color_LED[1]=HSV_to_G(h_LED,255,255);//s,v=0~255
    color_LED[2]=HSV_to_B(h_LED,255,255);//s,v=0~255
-   Serial.println("to RGB");
-   Serial.println(color_LED[0]);
-   Serial.println(color_LED[1]);
-   Serial.println(color_LED[2]);
    //////////////////////////////
    
    //Light Cloth//////////////////
-   allLightFlash(color_LED[0],color_LED[1], color_LED[2]);
+   allLight(color_LED[0],color_LED[1], color_LED[2]);
    //////////////////////////////
   
   loopCount++;
 }
 
-void timerFire() {//per beat_sec ms
-   
-}
 
-void allLightFlash(int r_in, int g_in, int b_in){ //for test
+void allLight(int r_in, int g_in, int b_in){ //for test
   for(int j=0;j<NUMPIXELS;j++){
       p.setPixelColor(j, p.Color(r_in,g_in,b_in));
     }
     p.show();
     
 }
-/*
- * for(int j=0;j<NUMPIXELS;j++){
-      p.setPixelColor(j, p.Color(tmp[0],tmp[1],tmp[2]));
-    }
-    p.show();
- */
-
 
 
