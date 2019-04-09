@@ -52,7 +52,9 @@ void loop() {
     if(Serial.available()>0){
       for(int i=0;i<3;i++){
         serial[i]=Serial.read();
+        Serial.print(serial[i]);
       }
+      Serial.println(" ");
     }
     mode=serial[2];
    ///////////////////////////////

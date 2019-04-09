@@ -43,10 +43,6 @@ void ofApp::update(){
     hue_second_send=ofMap(hue_second,0,360,101,200);
     ////////////////////////////////
     
-    //モードについて////////////////////
-    mode=205;
-    /////////////////////////////////
-    
     //シリアル通信////////////////////
     serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
     serialArduino.writeByte(Byte(hue_second_send));
@@ -54,10 +50,14 @@ void ofApp::update(){
     std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
     
+    //モードについて////////////////////
+    //mode=205;
+    /////////////////////////////////
+    
+    
+    
     //モードを戻す/これはupdateの最後////
-    if(mode==203||mode==204){
-        mode=0;
-    }
+    
     ////////////////////////////////
 }
 
@@ -93,6 +93,27 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    switch(key){
+        case 'z':
+            mode=201;
+            break;
+        case 'x':
+            mode=202;
+            break;
+        case 'k':
+            mode=203;
+            break;
+        case 'l':
+            mode=204;
+            break;
+        case 'o':
+            mode=205;
+            break;
+        case 'p':
+            mode=206;
+            break;
+    }
     
 }
 
