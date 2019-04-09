@@ -14,7 +14,8 @@ void ofApp::setup(){
     //GUI
     ofBackground(0,0,0);
     gui.setup();
-    gui.add(hue.setup("hue",1,1,359));
+    gui.add(hue_first.setup("hue_first",0,0,360));
+    gui.add(hue_second.setup("hue_second",0,0,360));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
     fft_draw_size.set(400,200);
     // 描画系設定
@@ -37,12 +38,26 @@ void ofApp::update(){
     fft.update();
     ///////////////////////////////
     
-    //色の値/////////////////////////
-    hue_send=ofMap(hue,0,359,0,100);
+    //色の値/////////////////////////デフォルトではhue_firstを送る
+    hue_first_send=ofMap(hue_first,0,360,1,100);
+    hue_second_send=ofMap(hue_second,0,360,101,200);
     ////////////////////////////////
     
+    //モードについて////////////////////
+    mode=205;
+    /////////////////////////////////
+    
     //シリアル通信////////////////////
-    serialArduino.writeByte(Byte(hue_send));//hue
+    serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
+    serialArduino.writeByte(Byte(hue_second_send));
+    serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
+    std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
+    ////////////////////////////////
+    
+    //モードを戻す/これはupdateの最後////
+    if(mode==203||mode==204){
+        mode=0;
+    }
     ////////////////////////////////
 }
 

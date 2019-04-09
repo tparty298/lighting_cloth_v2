@@ -8,10 +8,16 @@ Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
 //general variable////////////////
 int loopCount=0;
-int h_in=0;
+int serial_in=0;
+int serial[3]={1,101,0};
+int h_LED_first=0;
+int h_LED_second=0;
+int mode=0;
 int h_LED=0;
-int color_LED[3]={0,0,0};
+int color_LED_first[3]={0,0,0};
+int color_LED_second[3]={0,0,0};
 float beat_sec;
+int mode_change_flag=0;//モードの変更中は1
 /////////////////////////////////
 
 //change variable///////////////
@@ -43,35 +49,68 @@ void setup() {
 
 void loop() { 
    //Serial///////////////////////
-    //Serial.println("start");
     if(Serial.available()>0){
-      h_in=Serial.read();
-      //Serial.println(h_in);
+      for(int i=0;i<3;i++){
+        serial[i]=Serial.read();
+      }
     }
+    mode=serial[2];
    ///////////////////////////////
 
-   //color set/////////////////
-   h_LED=int(h_in*3.6);//h_in is 0~100, h_LED is 0~360
-   Serial.println(h_LED);
-   color_LED[0]=HSV_to_R(h_LED,255,255);//s,v=0~255
-   color_LED[1]=HSV_to_G(h_LED,255,255);//s,v=0~255
-   color_LED[2]=HSV_to_B(h_LED,255,255);//s,v=0~255
+   //color set/////////////////1~100or101~200のとき
+   h_LED_first=map(serial[0],1,100,0,360);
+   color_LED_first[0]=HSV_to_R(h_LED_first,255,255);//s,v=0~255
+   color_LED_first[1]=HSV_to_G(h_LED_first,255,255);//s,v=0~255
+   color_LED_first[2]=HSV_to_B(h_LED_first,255,255);//s,v=0~255
+   h_LED_second=map(serial[1],101,200,0,360);
+   color_LED_second[0]=HSV_to_R(h_LED_second,255,255);//s,v=0~255
+   color_LED_second[1]=HSV_to_G(h_LED_second,255,255);//s,v=0~255
+   color_LED_second[2]=HSV_to_B(h_LED_second,255,255);//s,v=0~255
+   /*
+   if(serial_in>=1&&serial_in<=200){
+     if(serial_in<=100){
+      h_LED=map(serial_in,1,100,0,360);
+      color_LED_first[0]=HSV_to_R(h_LED,255,255);//s,v=0~255
+      color_LED_first[1]=HSV_to_G(h_LED,255,255);//s,v=0~255
+      color_LED_first[2]=HSV_to_B(h_LED,255,255);//s,v=0~255
+      allLight(255,0,0);
+     }else{//予約色のとき
+      h_LED=map(serial_in,101,200,0,360);
+      color_LED_second[0]=HSV_to_R(h_LED,255,255);//s,v=0~255
+      color_LED_second[1]=HSV_to_G(h_LED,255,255);//s,v=0~255
+      color_LED_second[2]=HSV_to_B(h_LED,255,255);//s,v=0~255
+     }
+   }
+   */
    //////////////////////////////
    
-   //Light Cloth//////////////////
-   allLight(color_LED[0],color_LED[1], color_LED[2]);
+   //Light Cloth ここでオペレーションをする//////////////////
+   switch(mode){
+    case 0:
+      break;
+    case 201:
+      allLight(0,0,0);
+      break;
+    case 202:
+      allLight(255,0,0);
+      break;
+    case 203:
+      flushLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
+      break;
+    case 204:
+      flushLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      break;
+    case 205:
+      allLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
+      break;
+    case 206:
+      allLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      break;
+    default:
+      break;
+   }
+   
    //////////////////////////////
   
   loopCount++;
 }
-
-
-void allLight(int r_in, int g_in, int b_in){ //for test
-  for(int j=0;j<NUMPIXELS;j++){
-      p.setPixelColor(j, p.Color(r_in,g_in,b_in));
-    }
-    p.show();
-    
-}
-
-

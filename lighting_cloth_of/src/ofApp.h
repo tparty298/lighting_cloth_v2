@@ -34,7 +34,8 @@ class ofApp : public ofBaseApp{
     
         //GUI関係の変数////////////////
         ofxPanel gui;
-        ofxIntSlider hue;
+        ofxIntSlider hue_first;
+        ofxIntSlider hue_second;
         ofxFloatSlider sound_volume_ratio;
     
         ofImage TParty;
@@ -47,5 +48,14 @@ class ofApp : public ofBaseApp{
     
         //色関係の変数/////////////////
         int hue_send=1;
+        int hue_first_send=1;
+        int hue_second_send=101;
+        int hue_first_send_change_flag=0;
+        int hue_second_send_change_flag=0;
         /////////////////////////////
+    
+        //モードのついての変数///////////
+        int mode=201;
+        int mode_change_flag=0;
+        ////////////////////////////
 };
