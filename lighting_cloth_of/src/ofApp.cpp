@@ -15,7 +15,7 @@ void ofApp::setup(){
     ofBackground(0,0,0);
     gui.setup();
     gui.add(hue_first.setup("hue_first",0,0,360));
-    gui.add(hue_second.setup("hue_second",0,0,360));
+    gui.add(hue_second.setup("hue_second",240,0,360));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
     fft_draw_size.set(400,200);
     // 描画系設定
@@ -43,12 +43,7 @@ void ofApp::update(){
     hue_second_send=ofMap(hue_second,0,360,101,200);
     ////////////////////////////////
     
-    //シリアル通信////////////////////
-    serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
-    serialArduino.writeByte(Byte(hue_second_send));
-    serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
-    std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
-    ////////////////////////////////
+    
     
     //モードについて////////////////////
     //mode=205;
@@ -77,6 +72,13 @@ void ofApp::draw(){
     }
     ofEndShape();
     ///////////////////////////////////
+    
+    //シリアル通信////////////////////
+    serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
+    serialArduino.writeByte(Byte(hue_second_send));
+    serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
+    std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
+    ////////////////////////////////
     
     //GUI/////////////////////////////
     TParty.draw(1025,25,150,120);
@@ -114,7 +116,6 @@ void ofApp::keyPressed(int key){
             mode=206;
             break;
     }
-    
 }
 
 //--------------------------------------------------------------

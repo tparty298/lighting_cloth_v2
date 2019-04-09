@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 #define PININIT        13
 #define NUMPIXELS      296
-#define BRIGHTNESS     10
+#define BRIGHTNESS     255
 
 Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
@@ -25,6 +25,7 @@ int bpm=128;
 ////////////////////////////////
 
 void setup() {
+  
   //general setup///////////////////////////////////////////////////////////
   Serial.begin(9600);
   //////////////////////////////////////////////////////////////////////////
@@ -52,9 +53,8 @@ void loop() {
     if(Serial.available()>0){
       for(int i=0;i<3;i++){
         serial[i]=Serial.read();
-        Serial.print(serial[i]);
+        Serial.println(" ");
       }
-      Serial.println(" ");
     }
     mode=serial[2];
    ///////////////////////////////
@@ -97,10 +97,10 @@ void loop() {
       allLight(255,0,0);
       break;
     case 203:
-      flushLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
+      runningLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
       break;
     case 204:
-      flushLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      runningLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
       break;
     case 205:
       allLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
@@ -111,7 +111,7 @@ void loop() {
     default:
       break;
    }
-   
+   Serial.flush();
    //////////////////////////////
   
   loopCount++;
