@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 #define PININIT        13
 #define NUMPIXELS      296
-#define BRIGHTNESS     255
+#define BRIGHTNESS     100
 
 Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
