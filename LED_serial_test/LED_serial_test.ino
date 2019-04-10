@@ -97,10 +97,10 @@ void loop() {
       allLight(255,0,0);
       break;
     case 203:
-      runningLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
+      runningLight(color_LED_first[0],color_LED_first[1],color_LED_first[2],loopCount);
       break;
     case 204:
-      runningLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      runningLight(color_LED_second[0],color_LED_second[1],color_LED_second[2],loopCount);
       break;
     case 205:
       allLight(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
