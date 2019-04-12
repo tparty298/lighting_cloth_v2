@@ -118,6 +118,15 @@ void ofApp::keyPressed(int key){
         case 'q':
             mode=207;
             break;
+        case 'w':
+            mode=208;
+            break;
+        case 'e':
+            mode=209;
+            break;
+        case 'c':
+            mode=210;
+            break;
     }
 }
 

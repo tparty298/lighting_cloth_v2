@@ -22,6 +22,7 @@ int mode_change_flag=0;//モードの変更中は1
 
 //change variable///////////////
 int bpm=128;
+float rainbow_change_speed=0.5;
 ////////////////////////////////
 
 void setup() {
@@ -110,6 +111,15 @@ void loop() {
       break;
     case 207:
       noiseLight(color_LED_first[0],color_LED_first[1],color_LED_first[2],color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      break;
+    case 208:
+      noiseLightDelete(color_LED_first[0],color_LED_first[1],color_LED_first[2]);
+      break;
+    case 209:
+      noiseLightDelete(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      break;
+    case 210:
+      rainbowLight(loopCount);
       break;
     default:
       break;
