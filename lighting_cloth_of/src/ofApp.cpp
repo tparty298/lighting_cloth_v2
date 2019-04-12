@@ -77,7 +77,7 @@ void ofApp::draw(){
     serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
     serialArduino.writeByte(Byte(hue_second_send));
     serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
-    std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
+    //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
     
     //GUI/////////////////////////////
