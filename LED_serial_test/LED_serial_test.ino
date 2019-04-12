@@ -108,6 +108,9 @@ void loop() {
     case 206:
       allLight(color_LED_second[0],color_LED_second[1],color_LED_second[2]);
       break;
+    case 207:
+      noiseLight(color_LED_first[0],color_LED_first[1],color_LED_first[2],color_LED_second[0],color_LED_second[1],color_LED_second[2]);
+      break;
     default:
       break;
    }

@@ -16,3 +16,14 @@ void runningLight(int r_in, int g_in, int b_in, int loopCount){
   p.show();
 }
 
+void noiseLight(int r1_in, int g1_in, int b1_in,int r2_in, int g2_in, int b2_in){
+  for(int i=0;i<NUMPIXELS;i++){
+    if(random(2)%2==0){
+      p.setPixelColor(i, p.Color(r1_in,g1_in,b1_in));
+    }else{
+      p.setPixelColor(i, p.Color(r2_in,g2_in,b2_in));
+    }
+  }
+  p.show();
+}
+
