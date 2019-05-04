@@ -37,7 +37,7 @@ class ofApp : public ofBaseApp{
         ofxIntSlider hue_first;
         ofxIntSlider hue_second;
         ofxFloatSlider sound_volume_ratio;
-    
+        ofxIntSlider value;
         ofImage TParty;
         ofImage cloth;
         ofVec2f cloth_image_positon;

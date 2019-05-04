@@ -16,6 +16,7 @@ void ofApp::setup(){
     gui.setup();
     gui.add(hue_first.setup("hue_first",0,0,360));
     gui.add(hue_second.setup("hue_second",240,0,360));
+    gui.add(value.setup("value",240,221,240));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
     fft_draw_size.set(400,200);
     // 描画系設定
@@ -126,6 +127,16 @@ void ofApp::keyPressed(int key){
             break;
         case 'c':
             mode=210;
+            break;
+        case '1':
+            mode=221;
+            std::cout<<"1"<<std::endl;
+            break;
+        case '2':
+            mode=240;
+            std::cout<<"2"<<std::endl;
+            break;
+        default:
             break;
     }
 }

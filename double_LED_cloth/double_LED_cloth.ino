@@ -13,6 +13,8 @@ int serial[3]={1,101,0};
 int h_LED_first=0;
 int h_LED_second=0;
 int mode=0;
+int value=255;
+int value_st=255;
 int h_LED=0;
 int color_LED_first[3]={0,0,0};
 int color_LED_second[3]={0,0,0};
@@ -61,19 +63,38 @@ void loop() {
         //Serial.println(" ");
         Serial.println(mode);
       }
+      //Serial.println(value);
     }
     mode=serial[2];
    ///////////////////////////////
 
    //color set/////////////////1~100or101~200のとき
-   h_LED_first=map(serial[0],1,100,0,360);
-   color_LED_first[0]=HSV_to_R(h_LED_first,255,255);//s,v=0~255
-   color_LED_first[1]=HSV_to_G(h_LED_first,255,255);//s,v=0~255
-   color_LED_first[2]=HSV_to_B(h_LED_first,255,255);//s,v=0~255
-   h_LED_second=map(serial[1],101,200,0,360);
-   color_LED_second[0]=HSV_to_R(h_LED_second,255,255);//s,v=0~255
-   color_LED_second[1]=HSV_to_G(h_LED_second,255,255);//s,v=0~255
-   color_LED_second[2]=HSV_to_B(h_LED_second,255,255);//s,v=0~255
+   /*
+   if(mode==221){
+    value=20;
+   }else if(mode==240){
+    value=255;
+   }
+   */
+   if(mode==240){
+     h_LED_first=map(serial[0],1,100,0,360);
+     color_LED_first[0]=HSV_to_R(h_LED_first,255,255);//s,v=0~255
+     color_LED_first[1]=HSV_to_G(h_LED_first,255,255);//s,v=0~255
+     color_LED_first[2]=HSV_to_B(h_LED_first,255,255);//s,v=0~255
+     h_LED_second=map(serial[1],101,200,0,360);
+     color_LED_second[0]=HSV_to_R(h_LED_second,255,255);//s,v=0~255
+     color_LED_second[1]=HSV_to_G(h_LED_second,255,255);//s,v=0~255
+     color_LED_second[2]=HSV_to_B(h_LED_second,255,value);//s,v=0~255
+   }else if(mode==221){
+    h_LED_first=map(serial[0],1,100,0,360);
+     color_LED_first[0]=HSV_to_R(h_LED_first,255,30);//s,v=0~255
+     color_LED_first[1]=HSV_to_G(h_LED_first,255,30);//s,v=0~255
+     color_LED_first[2]=HSV_to_B(h_LED_first,255,30);//s,v=0~255
+     h_LED_second=map(serial[1],101,200,0,360);
+     color_LED_second[0]=HSV_to_R(h_LED_second,255,30);//s,v=0~255
+     color_LED_second[1]=HSV_to_G(h_LED_second,255,30);//s,v=0~255
+     color_LED_second[2]=HSV_to_B(h_LED_second,255,30);//s,v=0~255
+   }
    /*
    if(serial_in>=1&&serial_in<=200){
      if(serial_in<=100){
