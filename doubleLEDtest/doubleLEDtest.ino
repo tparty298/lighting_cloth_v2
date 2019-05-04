@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #define PININIT        10
-#define NUMPIXELS      19
+#define NUMPIXELS      229
 #define BRIGHTNESS     10
 #define SIGNAL 2
 
