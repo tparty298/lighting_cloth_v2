@@ -78,6 +78,7 @@ void ofApp::draw(){
     serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
     serialArduino.writeByte(Byte(hue_second_send));
     serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
+    serialArduino.writeByte(Byte(value));
     //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
     
@@ -127,14 +128,6 @@ void ofApp::keyPressed(int key){
             break;
         case 'c':
             mode=210;
-            break;
-        case '1':
-            mode=221;
-            std::cout<<"1"<<std::endl;
-            break;
-        case '2':
-            mode=240;
-            std::cout<<"2"<<std::endl;
             break;
         default:
             break;
