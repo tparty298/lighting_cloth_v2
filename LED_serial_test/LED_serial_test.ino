@@ -1,8 +1,8 @@
 #include <MsTimer2.h>
 #include <Adafruit_NeoPixel.h>
-#define PININIT        13
-#define NUMPIXELS      296
-#define BRIGHTNESS     100
+#define PININIT        10
+#define NUMPIXELS      316
+#define BRIGHTNESS     150
 
 Adafruit_NeoPixel p=Adafruit_NeoPixel(NUMPIXELS, PININIT, NEO_GRB + NEO_KHZ800);
 
@@ -54,7 +54,8 @@ void loop() {
     if(Serial.available()>0){
       for(int i=0;i<3;i++){
         serial[i]=Serial.read();
-        Serial.println(" ");
+        //Serial.println(" ");
+        Serial.println(mode);
       }
     }
     mode=serial[2];
