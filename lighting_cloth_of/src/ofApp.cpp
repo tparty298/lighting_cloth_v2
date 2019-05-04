@@ -1,5 +1,5 @@
 #include "ofApp.h"
-
+#define RECIEVE_PORT 8000
 
 int tmp=-1;
 //--------------------------------------------------------------
@@ -31,10 +31,26 @@ void ofApp::setup(){
         OF_EXIT_APP(0);
     }
     //色設定
+    
+    //OSC
+    receiver.setup(RECIEVE_PORT);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    //OSC/////////////////////////
+    OSCrecv();
+    hue_first=osc_in[1]*360;
+    hue_second=osc_in[2]*360;
+    value=ofMap(osc_in[0],0,1,221,240);
+    if(hue_switch[0]=="bang"){
+        mode=205;
+    }
+    if(hue_switch[1]=="bang"){
+        mode=206;
+    }
+    //////////////////////////////
+    
     //音関連////////////////////////
     fft.update();
     ///////////////////////////////
@@ -55,6 +71,10 @@ void ofApp::update(){
     //モードを戻す/これはupdateの最後////
     
     ////////////////////////////////
+    
+    //OSC戻す
+    hue_switch[0]=" ";
+    hue_switch[1]=" ";
 }
 
 //--------------------------------------------------------------
@@ -183,3 +203,29 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+void ofApp::OSCrecv(){
+    
+    while( receiver.hasWaitingMessages() )
+    {
+        
+        ofxOscMessage m;
+        
+        receiver.getNextMessage( &m );
+        
+        //OSC message setting
+        if ( m.getAddress() == "/brightness" ){
+            osc_in[0] = m.getArgAsFloat(0);
+        }else if( m.getAddress() == "/hue1"){
+            osc_in[1] = m.getArgAsFloat(0);
+        }else if( m.getAddress() == "/hue2"){
+            osc_in[2] = m.getArgAsFloat(0);
+        }else if(m.getAddress() == "/switch_hue1"){
+            hue_switch[0] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/switch_hue2"){
+            hue_switch[1] = m.getArgAsString(0);
+        }
+    }
+}
+
+

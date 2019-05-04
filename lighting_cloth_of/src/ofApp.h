@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxEasyFft.h"
+#include "ofxOsc.h"
+
 using namespace std;
 
 #define NUM_LED 296
@@ -58,4 +60,11 @@ class ofApp : public ofBaseApp{
         int mode=201;
         int mode_change_flag=0;
         ////////////////////////////
+    
+        //OSC/////////////////////
+        ofxOscReceiver  receiver;
+        void OSCrecv();
+        float osc_in[3]; //brightness, hue1, hue2
+        string hue_switch[2];
+        //////////////////////////
 };
