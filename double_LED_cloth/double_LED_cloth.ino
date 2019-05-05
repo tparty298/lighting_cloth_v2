@@ -20,6 +20,7 @@ int color_LED_first[3]={0,0,0};
 int color_LED_second[3]={0,0,0};
 float beat_sec;
 int mode_change_flag=0;//モードの変更中は1
+int running_function_call_num=0;
 /////////////////////////////////
 
 //change variable///////////////
@@ -60,26 +61,31 @@ void loop() {
     if(Serial.available()>0){
       for(int i=0;i<4;i++){
         serial[i]=Serial.read();
-        Serial.println(" ");
+        //Serial.print(serial[i]);
+        Serial.print(" ");
         //Serial.print(serial[i]);
       }
-      Serial.println(" ");
+      Serial.print(" ");
       //Serial.println(value);
     }
     if(serial[3]>=221&&serial[3]<=240){
       value=map(serial[3],221,240,0,255);
     }
-    
-    mode=serial[2];
-    
+    if(serial[2]>=201&&serial[2]<=210){
+      mode=serial[2];
+    }
    ///////////////////////////////
 
    //color set/////////////////1~100or101~200のとき
-   h_LED_first=map(serial[0],1,100,0,360);
+   if(serial[0]>=1&&serial[0]<=100){
+    h_LED_first=map(serial[0],1,100,0,360);
+   }
    color_LED_first[0]=HSV_to_R(h_LED_first,255,value);//s,v=0~255
    color_LED_first[1]=HSV_to_G(h_LED_first,255,value);//s,v=0~255
    color_LED_first[2]=HSV_to_B(h_LED_first,255,value);//s,v=0~255
-   h_LED_second=map(serial[1],101,200,0,360);
+   if(serial[1]>=101&&serial[1]<=200){
+     h_LED_second=map(serial[1],101,200,0,360);
+   }
    color_LED_second[0]=HSV_to_R(h_LED_second,255,value);//s,v=0~255
    color_LED_second[1]=HSV_to_G(h_LED_second,255,value);//s,v=0~255
    color_LED_second[2]=HSV_to_B(h_LED_second,255,value);//s,v=0~255
@@ -138,6 +144,15 @@ void loop() {
     default:
       break;
    }
+   /*
+   Serial.print(h_LED_first);
+   Serial.print(" ");
+   Serial.print(h_LED_first);
+   Serial.print(" ");
+   Serial.print(mode);
+   Serial.print(" ");
+   Serial.print(value);
+   */
    Serial.flush();
    //////////////////////////////
   
