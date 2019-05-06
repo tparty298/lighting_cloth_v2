@@ -29,9 +29,13 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
         ofSerial serialArduino; // Arduinoのシリアル通信用
+
+    
     
         //音関連//////////////////////
         ofxEasyFft fft;
+        float buffer_sum=0;
+        float sound_volume_0to1;
         /////////////////////////////
     
         //GUI関係の変数////////////////
@@ -39,6 +43,7 @@ class ofApp : public ofBaseApp{
         ofxIntSlider hue_first;
         ofxIntSlider hue_second;
         ofxFloatSlider sound_volume_ratio;
+        ofxFloatSlider sound_volume_max;
         ofxIntSlider value;
         ofImage TParty;
         ofImage cloth;

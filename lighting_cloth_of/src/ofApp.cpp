@@ -18,6 +18,7 @@ void ofApp::setup(){
     gui.add(hue_second.setup("hue_second",240,0,360));
     gui.add(value.setup("value",240,221,240));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
+    gui.add(sound_volume_max.setup("sound_volume_max",30,1,500));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
@@ -106,11 +107,17 @@ void ofApp::draw(){
     ofBeginShape();
     for(int i=0;i<buffer.size();i++){
         buffer[i]*=sound_volume_ratio;
+        buffer_sum+=buffer[i];
         float x=ofMap(i,0,buffer.size(),0,ofGetWidth());
         float y=ofMap(buffer[i],0,1,ofGetHeight(),0);
         ofVertex(x, y);
     }
     ofEndShape();
+    sound_volume_0to1=ofMap(buffer_sum,0,sound_volume_max,0,1);
+    if(sound_volume_0to1>=1){
+        sound_volume_0to1=1;
+    }
+    ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
     ///////////////////////////////////
     
     //シリアル通信////////////////////
@@ -131,7 +138,10 @@ void ofApp::draw(){
     //余計だけど入れるところ/////////////
     string msg = ofToString((int) ofGetFrameRate()) + " fps";
     ofDrawBitmapString(msg, ofGetWidth() - 80, ofGetHeight() - 20);
-    /////////////////////////////////
+    //////////////////////////////////
+    
+    //変数の0化
+    buffer_sum=0;
 }
 
 //--------------------------------------------------------------
