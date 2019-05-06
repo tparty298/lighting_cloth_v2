@@ -36,6 +36,7 @@ class ofApp : public ofBaseApp{
         ofxEasyFft fft;
         float buffer_sum=0;
         float sound_volume_0to1;
+        int sound_volume_500=500;
         /////////////////////////////
     
         //GUI関係の変数////////////////
@@ -43,6 +44,7 @@ class ofApp : public ofBaseApp{
         ofxIntSlider hue_first;
         ofxIntSlider hue_second;
         ofxFloatSlider sound_volume_ratio;
+        ofxFloatSlider sound_volume_min;
         ofxFloatSlider sound_volume_max;
         ofxIntSlider value;
         ofImage TParty;
@@ -64,12 +66,14 @@ class ofApp : public ofBaseApp{
         //モードのついての変数///////////
         int mode=201;
         int mode_change_flag=0;
+        int bool_volume=0;
         ////////////////////////////
     
         //OSC/////////////////////
         ofxOscReceiver  receiver;
         void OSCrecv();
-        float osc_in[3]; //brightness, hue1, hue2
+        float osc_in[5]; //brightness, hue1, hue2, volume_min, volume_max
         string mode_switch[7];
+        string mode_volume;
         //////////////////////////
 };

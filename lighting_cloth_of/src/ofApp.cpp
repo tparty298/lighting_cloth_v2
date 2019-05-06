@@ -18,7 +18,8 @@ void ofApp::setup(){
     gui.add(hue_second.setup("hue_second",240,0,360));
     gui.add(value.setup("value",240,221,240));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
-    gui.add(sound_volume_max.setup("sound_volume_max",30,1,500));
+    gui.add(sound_volume_min.setup("sound_volume_min",10,0,sound_volume_500));
+    gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
@@ -68,6 +69,15 @@ void ofApp::update(){
     if(mode_switch[6]=="bang"){
         mode=207;
     }
+    if(mode_volume=="bang"){
+        if(bool_volume==0){
+            bool_volume=1;
+        }else{
+            bool_volume=0;
+        }
+    }
+    sound_volume_min=osc_in[3];
+    sound_volume_max=osc_in[4];
     //////////////////////////////
     
     //音関連////////////////////////
@@ -95,6 +105,7 @@ void ofApp::update(){
     for(int i=0;i<7;i++){
         mode_switch[i]=" ";
     }
+    mode_volume=" ";
 }
 
 //--------------------------------------------------------------
@@ -124,7 +135,15 @@ void ofApp::draw(){
     serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
     serialArduino.writeByte(Byte(hue_second_send));
     serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
-    serialArduino.writeByte(Byte(value));
+    switch(bool_volume){
+        case 0:
+            serialArduino.writeByte(Byte(value));
+            break;
+        case 1:
+            serialArduino.writeByte(Byte(int(value*sound_volume_0to1)));
+            break;
+    }
+    ofDrawBitmapString(bool_volume,200,250);//音量の表示
     //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
     
@@ -263,6 +282,12 @@ void ofApp::OSCrecv(){
             mode_switch[5] = m.getArgAsString(0);
         }else if(m.getAddress() == "/q"){
             mode_switch[6] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/bool_volume"){
+            mode_volume = m.getArgAsString(0);
+        }else if( m.getAddress() == "/volume_min"){
+            osc_in[3] = m.getArgAsFloat(0);
+        }else if( m.getAddress() == "/volume_max"){
+            osc_in[4] = m.getArgAsFloat(0);
         }
     }
 }
