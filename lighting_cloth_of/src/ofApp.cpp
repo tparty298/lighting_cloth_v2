@@ -43,11 +43,29 @@ void ofApp::update(){
     hue_first=osc_in[1]*360;
     hue_second=osc_in[2]*360;
     value=ofMap(osc_in[0],0,1,221,240);
-    if(hue_switch[0]=="bang"){
+    if(mode_switch[0]=="bang"){
         mode=205;
     }
-    if(hue_switch[1]=="bang"){
+    if(mode_switch[1]=="bang"){
         mode=206;
+    }
+    if(mode_switch[2]=="bang"){
+        mode=203;
+    }
+    if(mode_switch[3]=="bang"){
+        mode=204;
+    }
+    if(mode_switch[3]=="bang"){
+        mode=204;
+    }
+    if(mode_switch[4]=="bang"){
+        mode=208;
+    }
+    if(mode_switch[5]=="bang"){
+        mode=209;
+    }
+    if(mode_switch[6]=="bang"){
+        mode=207;
     }
     //////////////////////////////
     
@@ -73,8 +91,9 @@ void ofApp::update(){
     ////////////////////////////////
     
     //OSC戻す
-    hue_switch[0]=" ";
-    hue_switch[1]=" ";
+    for(int i=0;i<7;i++){
+        mode_switch[i]=" ";
+    }
 }
 
 //--------------------------------------------------------------
@@ -221,9 +240,19 @@ void ofApp::OSCrecv(){
         }else if( m.getAddress() == "/hue2"){
             osc_in[2] = m.getArgAsFloat(0);
         }else if(m.getAddress() == "/switch_hue1"){
-            hue_switch[0] = m.getArgAsString(0);
+            mode_switch[0] = m.getArgAsString(0);
         }else if(m.getAddress() == "/switch_hue2"){
-            hue_switch[1] = m.getArgAsString(0);
+            mode_switch[1] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/k"){
+            mode_switch[2] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/l"){
+            mode_switch[3] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/w"){
+            mode_switch[4] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/e"){
+            mode_switch[5] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/q"){
+            mode_switch[6] = m.getArgAsString(0);
         }
     }
 }

@@ -65,6 +65,6 @@ class ofApp : public ofBaseApp{
         ofxOscReceiver  receiver;
         void OSCrecv();
         float osc_in[3]; //brightness, hue1, hue2
-        string hue_switch[2];
+        string mode_switch[7];
         //////////////////////////
 };
