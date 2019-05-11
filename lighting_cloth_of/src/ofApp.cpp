@@ -41,6 +41,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     //OSC/////////////////////////
+    ////////////ここからOSCendまでコメントアウトするとGUIでも使えるようになる
     OSCrecv();
     hue_first=osc_in[1]*360;
     hue_second=osc_in[2]*360;
@@ -78,6 +79,7 @@ void ofApp::update(){
     }
     sound_volume_min=osc_in[3];
     sound_volume_max=osc_in[4];
+    /////////////////OSCend ここまでコメントアウトするとGUIから使えるようになる
     //////////////////////////////
     
     //音関連////////////////////////
