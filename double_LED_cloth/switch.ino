@@ -5,6 +5,7 @@ void which(int p_num, int n, int r, int g, int b){
       break;
     case 2:
       p2.setPixelColor(n, p2.Color(r,g,b));
+      break;
   }
 }
 
