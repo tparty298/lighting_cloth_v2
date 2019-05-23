@@ -39,6 +39,42 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-36",
+					"maxclass" : "live.button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 294.0, 508.0, 36.965518951416016, 32.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_type" : 2,
+							"parameter_longname" : "live.button[8]",
+							"parameter_mmax" : 1.0,
+							"parameter_shortname" : "live.button"
+						}
+
+					}
+,
+					"varname" : "live.button[8]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-37",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 290.5, 560.0, 125.0, 22.0 ],
+					"text" : "prepend /bool_fft_hue"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-32",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -209,7 +245,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 1,
-					"patching_rect" : [ 185.0, 413.0, 36.965518951416016, 32.0 ],
+					"patching_rect" : [ 337.0, 645.0, 36.965518951416016, 32.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
@@ -232,7 +268,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 185.0, 471.0, 66.0, 22.0 ],
+					"patching_rect" : [ 337.0, 703.0, 66.0, 22.0 ],
 					"text" : "prepend /q"
 				}
 
@@ -741,6 +777,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-37", 0 ],
+					"source" : [ "obj-36", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"source" : [ "obj-37", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"source" : [ "obj-4", 0 ]
 				}
@@ -779,6 +829,7 @@
 			"obj-29" : [ "live.slider[4]", "live.slider", 0 ],
 			"obj-8" : [ "live.button", "live.button", 0 ],
 			"obj-13" : [ "live.button[1]", "live.button", 0 ],
+			"obj-36" : [ "live.button[8]", "live.button", 0 ],
 			"obj-9" : [ "live.slider[3]", "live.slider", 0 ],
 			"obj-1" : [ "live.slider", "live.slider", 0 ],
 			"obj-21" : [ "live.button[5]", "live.button", 0 ],
@@ -863,6 +914,27 @@
 ,
 				"live.button" : 				{
 					"srcname" : "38.ctrl.0.chan.midi",
+					"min" : 0.0,
+					"max" : 1.0,
+					"flags" : 2
+				}
+,
+				"live.slider[5]" : 				{
+					"srcname" : "3.ctrl.0.chan.midi",
+					"min" : 0.0,
+					"max" : 127.0,
+					"flags" : 2
+				}
+,
+				"live.button[6]" : 				{
+					"srcname" : "69.ctrl.0.chan.midi",
+					"min" : 0.0,
+					"max" : 1.0,
+					"flags" : 2
+				}
+,
+				"live.button[8]" : 				{
+					"srcname" : "37.ctrl.0.chan.midi",
 					"min" : 0.0,
 					"max" : 1.0,
 					"flags" : 2

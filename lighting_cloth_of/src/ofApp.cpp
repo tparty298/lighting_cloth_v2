@@ -22,7 +22,9 @@ void ofApp::setup(){
     gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
     gui.add(LowPass.setup("LowPass(0~2048)",0,0,2048));
     gui.add(HighPass.setup("HighPass(0~2048)",2048,0,2048));
-    gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,10));
+    gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,30));
+    gui.add(fft_hue_min.setup("fft_hue_min",0,0,100));
+    gui.add(fft_hue_max.setup("fft_hue_max",100,0,100));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
@@ -113,6 +115,13 @@ void ofApp::update(){
             using_volume=true;
         }
     }
+    if(mode_switch[8]=="bang"){
+        if(using_fft_hue==true){
+            using_fft_hue=false;
+        }else{
+            using_fft_hue=true;
+        }
+    }
     
     /////////////////OSCend ここまでコメントアウトするとGUIから使えるようになる
     //////////////////////////////
@@ -139,7 +148,7 @@ void ofApp::update(){
     ////////////////////////////////
     
     //OSC戻す
-    for(int i=0;i<8;i++){
+    for(int i=0;i<9;i++){
         mode_switch[i]=" ";
     }
     mode_volume=" ";
@@ -193,6 +202,11 @@ void ofApp::draw(){
     ofRect(ofMap(frequency_volume_max_ten_average,0,buffer.size(),0,ofGetWidth()),ofMap(frequency_volume_max_volume,0,1,ofGetHeight(),0)/3+ofGetHeight()-300, 5, 1000);
     ofNoFill();
     ofSetColor(255, 255, 255);
+    fft_hue=ofMap(frequency_volume_max_ten_average, LowPass, HighPass, 1, 100);
+    string msg_fft_hue="fft_hue: "+ofToString(fft_hue);
+    ofDrawBitmapString(msg_fft_hue,200,850);
+    string msg_fft_hue_bool=ofToString(using_fft_hue)+" do you use fft_hue?";
+    ofDrawBitmapString(msg_fft_hue_bool,400,850);
     ///////////////////////////////////
     
     //シリアル通信////////////////////
@@ -205,7 +219,12 @@ void ofApp::draw(){
     */
     //複数の時
     for(int i=0;i<3;i++){
-        serialArduino[i].writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
+        if(using_fft_hue==true){
+            int send_fft_hue=ofMap(fft_hue, 0, 100, fft_hue_min, fft_hue_max);
+            serialArduino[i].writeByte(Byte(send_fft_hue));
+        }else{
+            serialArduino[i].writeByte(Byte(hue_first_send));
+        }
         serialArduino[i].writeByte(Byte(hue_second_send));
         serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
         if(using_volume==true){
@@ -361,6 +380,8 @@ void ofApp::OSCrecv(){
             mode_switch[6] = m.getArgAsString(0);
         }else if(m.getAddress() == "/bool_volume"){
             mode_switch[7] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/bool_fft_hue"){
+            mode_switch[8] = m.getArgAsString(0);
         }
     }
 }

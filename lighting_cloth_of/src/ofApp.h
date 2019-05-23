@@ -57,6 +57,7 @@ class ofApp : public ofBaseApp{
         ofxIntSlider s_r_multi;
         ofxIntSlider fft_hue_min;
         ofxIntSlider fft_hue_max;
+        int fft_hue=1;
         ofImage TParty;
         ofImage cloth;
         ofVec2f cloth_image_positon;
@@ -71,6 +72,7 @@ class ofApp : public ofBaseApp{
         int hue_second_send=101;
         int hue_first_send_change_flag=0;
         int hue_second_send_change_flag=0;
+        bool using_fft_hue=false;
         /////////////////////////////
     
         //モードのついての変数///////////
@@ -84,7 +86,7 @@ class ofApp : public ofBaseApp{
         ofxOscReceiver  receiver;
         void OSCrecv();
         float osc_in[6]; //brightness, hue1, hue2, volume_min, volume_max, sound_ratio
-        string mode_switch[8];
+        string mode_switch[9];
         string mode_volume;
         //////////////////////////
 };
