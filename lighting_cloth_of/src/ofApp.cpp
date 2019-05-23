@@ -20,6 +20,9 @@ void ofApp::setup(){
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
     gui.add(sound_volume_min.setup("sound_volume_min",10,0,sound_volume_500));
     gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
+    gui.add(LowPass.setup("LowPass(0~2048)",0,0,2048));
+    gui.add(HighPass.setup("HighPass(0~2048)",2048,0,2048));
+    gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,10));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
@@ -78,6 +81,7 @@ void ofApp::update(){
     hue_first=osc_in[1]*360;
     hue_second=osc_in[2]*360;
     value=ofMap(osc_in[0],0,1,221,240);
+    sound_volume_ratio = osc_in[5];
     if(mode_switch[0]=="bang"){
         mode=205;
     }
@@ -101,6 +105,13 @@ void ofApp::update(){
     }
     if(mode_switch[6]=="bang"){
         mode=207;
+    }
+    if(mode_switch[7]=="bang"){
+        if(using_volume==true){
+            using_volume=false;
+        }else{
+            using_volume=true;
+        }
     }
     
     /////////////////OSCend ここまでコメントアウトするとGUIから使えるようになる
@@ -128,7 +139,7 @@ void ofApp::update(){
     ////////////////////////////////
     
     //OSC戻す
-    for(int i=0;i<7;i++){
+    for(int i=0;i<8;i++){
         mode_switch[i]=" ";
     }
     mode_volume=" ";
@@ -143,11 +154,17 @@ void ofApp::draw(){
     ofSetLineWidth(2.0);
     ofBeginShape();
     for(int i=0;i<buffer.size();i++){
-        buffer[i]*=sound_volume_ratio;
-        buffer_sum+=buffer[i];
-        float x=ofMap(i,0,buffer.size(),0,ofGetWidth());
-        float y=ofMap(buffer[i],0,1,ofGetHeight(),0);
-        ofVertex(x, y/3+ofGetHeight()-300);
+        if(i>=LowPass&&i<=HighPass){
+            if(buffer[i]>frequency_volume_max_volume){
+                frequency_volume_max_volume=buffer[i];
+                frequency_volume_max=i;
+            }
+            buffer[i]*=sound_volume_ratio;
+            buffer_sum+=buffer[i];
+            float x=ofMap(i,0,buffer.size(),0,ofGetWidth());
+            float y=ofMap(buffer[i],0,1,ofGetHeight(),0);
+            ofVertex(x, y/3+ofGetHeight()-300);
+        }
     }
     ofEndShape();
     sound_volume_0to1=ofMap(buffer_sum,0,sound_volume_max,0,1);
@@ -156,6 +173,26 @@ void ofApp::draw(){
     }
     ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
     ofDrawBitmapString(mode,200,500);
+    string msg_using_volume = ofToString(int(using_volume)) + " do you use mic? 0:NO 1:YES";
+    ofDrawBitmapString(msg_using_volume,200,550);
+    ofDrawBitmapString(buffer_sum,200,700);
+   
+    for(int i=8;i>=0;i--){
+        frequency_volume_max_ten_average_array[i+1]=frequency_volume_max_ten_average_array[i];
+    }
+    frequency_volume_max_ten_average_array[0]=frequency_volume_max;
+    for(int i=0;i<10;i++){
+        frequency_volume_max_ten_average+=frequency_volume_max_ten_average_array[i];
+    }
+    frequency_volume_max_ten_average/=10;
+    
+    string msg_frequency="frequency_volume_max: "+ofToString(int(frequency_volume_max))+"   frequency_volume_max_ten_average: "+ofToString(int(frequency_volume_max_ten_average));
+    ofDrawBitmapString(msg_frequency,200,800);
+    ofSetColor(255, 0, 0);
+    ofFill();
+    ofRect(ofMap(frequency_volume_max_ten_average,0,buffer.size(),0,ofGetWidth()),ofMap(frequency_volume_max_volume,0,1,ofGetHeight(),0)/3+ofGetHeight()-300, 5, 1000);
+    ofNoFill();
+    ofSetColor(255, 255, 255);
     ///////////////////////////////////
     
     //シリアル通信////////////////////
@@ -171,7 +208,14 @@ void ofApp::draw(){
         serialArduino[i].writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
         serialArduino[i].writeByte(Byte(hue_second_send));
         serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
-        serialArduino[i].writeByte(Byte(value));
+        if(using_volume==true){
+            int volume_arduino_send;
+            volume_arduino_send=ofMap(buffer_sum*s_r_multi, 0, 100, 221, 240);
+            serialArduino[i].writeByte(Byte(volume_arduino_send));
+            ofDrawBitmapString(volume_arduino_send,200,600);
+        }else{
+            serialArduino[i].writeByte(Byte(value));
+        }
     }
     //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
@@ -190,6 +234,8 @@ void ofApp::draw(){
     
     //変数の0化
     buffer_sum=0;
+    frequency_volume_max_volume=0;
+    frequency_volume_max=0;
 }
 
 //--------------------------------------------------------------
@@ -297,6 +343,8 @@ void ofApp::OSCrecv(){
             osc_in[1] = m.getArgAsFloat(0);
         }else if( m.getAddress() == "/hue2"){
             osc_in[2] = m.getArgAsFloat(0);
+        }else if( m.getAddress() == "/sound_ratio_in"){
+            osc_in[5] = m.getArgAsFloat(0);
         }else if(m.getAddress() == "/switch_hue1"){
             mode_switch[0] = m.getArgAsString(0);
         }else if(m.getAddress() == "/switch_hue2"){
@@ -311,6 +359,8 @@ void ofApp::OSCrecv(){
             mode_switch[5] = m.getArgAsString(0);
         }else if(m.getAddress() == "/q"){
             mode_switch[6] = m.getArgAsString(0);
+        }else if(m.getAddress() == "/bool_volume"){
+            mode_switch[7] = m.getArgAsString(0);
         }
     }
 }

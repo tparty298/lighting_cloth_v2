@@ -37,6 +37,11 @@ class ofApp : public ofBaseApp{
         float buffer_sum=0;
         float sound_volume_0to1;
         int sound_volume_500=500;
+        bool using_volume=false;
+        float frequency_volume_max=0;
+        float frequency_volume_max_volume=0;
+        float frequency_volume_max_ten_average_array[10]={0,0,0,0,0,0,0,0,0,0};
+        float frequency_volume_max_ten_average=0;
         /////////////////////////////
     
         //GUI関係の変数////////////////
@@ -47,6 +52,11 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider sound_volume_min;
         ofxFloatSlider sound_volume_max;
         ofxIntSlider value;
+        ofxIntSlider LowPass;
+        ofxIntSlider HighPass;
+        ofxIntSlider s_r_multi;
+        ofxIntSlider fft_hue_min;
+        ofxIntSlider fft_hue_max;
         ofImage TParty;
         ofImage cloth;
         ofVec2f cloth_image_positon;
@@ -67,13 +77,14 @@ class ofApp : public ofBaseApp{
         int mode=201;
         int mode_change_flag=0;
         int bool_volume=0;
+    
         ////////////////////////////
     
         //OSC/////////////////////
         ofxOscReceiver  receiver;
         void OSCrecv();
-        float osc_in[5]; //brightness, hue1, hue2, volume_min, volume_max
-        string mode_switch[7];
+        float osc_in[6]; //brightness, hue1, hue2, volume_min, volume_max, sound_ratio
+        string mode_switch[8];
         string mode_volume;
         //////////////////////////
 };

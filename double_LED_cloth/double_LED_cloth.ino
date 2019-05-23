@@ -6,7 +6,7 @@
 
 Adafruit_NeoPixel p1=Adafruit_NeoPixel(NUMPIXELS, 10, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel p2=Adafruit_NeoPixel(NUMPIXELS, 11, NEO_GRB + NEO_KHZ800);
-//general variable////////////////
+//general variable////////////////z
 int loopCount=0;
 int serial_in=0;
 int serial[4]={1,101,0,255};
@@ -115,7 +115,7 @@ void loop() {
       allLight(0,0,0);
       break;
     case 202:
-      allLight(255,0,0);
+      allLight(50,0,0);
       break;
     case 203:
       runningLight(color_LED_first[0],color_LED_first[1],color_LED_first[2],loopCount);
