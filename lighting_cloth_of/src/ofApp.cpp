@@ -24,7 +24,12 @@ void ofApp::setup(){
     // 描画系設定
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
+    
+    
+    
     // シリアル通信
+    //単数の時
+    /*
     serialArduino.listDevices();
     if(!serialArduino.setup(1, 9600)) {
         // log and error and leave
@@ -32,6 +37,32 @@ void ofApp::setup(){
         serialArduino.listDevices();
         OF_EXIT_APP(0);
     }
+     */
+    //複数の時
+    serialArduino[0].listDevices();
+    if(!serialArduino[0].setup(5, 9600)) {
+        // log and error and leave
+        ofLogError() << "0: could not open serial port - listing serial devices";
+        //serialArduino1.listDevices();
+        OF_EXIT_APP(0);
+    }
+    if(!serialArduino[1].setup(1, 9600)) {
+        // log and error and leave
+        ofLogError() << "1: could not open serial port - listing serial devices";
+        //serialArduino2.listDevices();
+        OF_EXIT_APP(0);
+    }
+    if(!serialArduino[2].setup(3, 9600)) {
+        // log and error and leave
+        ofLogError() << "2: could not open serial port - listing serial devices";
+        //serialArduino3.listDevices();
+        OF_EXIT_APP(0);
+    }
+    
+    
+    
+    
+    
     //色設定
     
     //OSC
@@ -42,6 +73,7 @@ void ofApp::setup(){
 void ofApp::update(){
     //OSC/////////////////////////
     ////////////ここからOSCendまでコメントアウトするとGUIでも使えるようになる
+    
     OSCrecv();
     hue_first=osc_in[1]*360;
     hue_second=osc_in[2]*360;
@@ -70,15 +102,7 @@ void ofApp::update(){
     if(mode_switch[6]=="bang"){
         mode=207;
     }
-    if(mode_volume=="bang"){
-        if(bool_volume==0){
-            bool_volume=1;
-        }else{
-            bool_volume=0;
-        }
-    }
-    sound_volume_min=osc_in[3];
-    sound_volume_max=osc_in[4];
+    
     /////////////////OSCend ここまでコメントアウトするとGUIから使えるようになる
     //////////////////////////////
     
@@ -123,7 +147,7 @@ void ofApp::draw(){
         buffer_sum+=buffer[i];
         float x=ofMap(i,0,buffer.size(),0,ofGetWidth());
         float y=ofMap(buffer[i],0,1,ofGetHeight(),0);
-        ofVertex(x, y);
+        ofVertex(x, y/3+ofGetHeight()-300);
     }
     ofEndShape();
     sound_volume_0to1=ofMap(buffer_sum,0,sound_volume_max,0,1);
@@ -131,21 +155,24 @@ void ofApp::draw(){
         sound_volume_0to1=1;
     }
     ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
+    ofDrawBitmapString(mode,200,500);
     ///////////////////////////////////
     
     //シリアル通信////////////////////
+    //単数の時
+    /*
     serialArduino.writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
     serialArduino.writeByte(Byte(hue_second_send));
     serialArduino.writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
-    switch(bool_volume){
-        case 0:
-            serialArduino.writeByte(Byte(value));
-            break;
-        case 1:
-            serialArduino.writeByte(Byte(int(value*sound_volume_0to1)));
-            break;
+    serialArduino.writeByte(Byte(value));
+    */
+    //複数の時
+    for(int i=0;i<3;i++){
+        serialArduino[i].writeByte(Byte(hue_first_send));//hue//serialArduino.writeByte(Byte(hue_send));
+        serialArduino[i].writeByte(Byte(hue_second_send));
+        serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
+        serialArduino[i].writeByte(Byte(value));
     }
-    ofDrawBitmapString(bool_volume,200,250);//音量の表示
     //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
     ////////////////////////////////
     
@@ -284,12 +311,6 @@ void ofApp::OSCrecv(){
             mode_switch[5] = m.getArgAsString(0);
         }else if(m.getAddress() == "/q"){
             mode_switch[6] = m.getArgAsString(0);
-        }else if(m.getAddress() == "/bool_volume"){
-            mode_volume = m.getArgAsString(0);
-        }else if( m.getAddress() == "/volume_min"){
-            osc_in[3] = m.getArgAsFloat(0);
-        }else if( m.getAddress() == "/volume_max"){
-            osc_in[4] = m.getArgAsFloat(0);
         }
     }
 }

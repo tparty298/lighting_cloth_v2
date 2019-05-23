@@ -28,8 +28,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-        ofSerial serialArduino; // Arduinoのシリアル通信用
-
+        //ofSerial serialArduino; // Arduinoのシリアル通信用
+        ofSerial serialArduino[3];//複数台の時
     
     
         //音関連//////////////////////
