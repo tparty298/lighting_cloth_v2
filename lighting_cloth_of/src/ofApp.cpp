@@ -182,7 +182,8 @@ void ofApp::draw(){
         sound_volume_0to1=1;
     }
     ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
-    ofDrawBitmapString(mode,200,500);
+    string msg_mode="mode: "+ofToString(mode);
+    ofDrawBitmapString(msg_mode,200,500);
     string msg_using_volume = ofToString(int(using_volume)) + " do you use mic? 0:NO 1:YES";
     ofDrawBitmapString(msg_using_volume,200,550);
     ofDrawBitmapString(buffer_sum,200,700);
@@ -248,7 +249,7 @@ void ofApp::draw(){
     ////////////////////////////////
     
     //GUI/////////////////////////////
-    TParty.draw(1025,25,150,120);
+    TParty.draw(980,25,200,200);//黒の時は180,150
     cloth.draw(cloth_image_positon.x,cloth_image_positon.y,cloth_image_size.x,cloth_image_size.y);
     gui.draw();//これはGUIの最後に
     //hue1
