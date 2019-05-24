@@ -26,6 +26,8 @@ void ofApp::setup(){
     gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,30));
     gui.add(fft_hue_min.setup("fft_hue_min",0,0,100));
     gui.add(fft_hue_max.setup("fft_hue_max",100,0,100));
+    gui.add(using_volume_button.setup("using_volume_button"));
+    gui.add(using_fft_hue_button.setup("using_fft_hue_button"));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
@@ -148,6 +150,22 @@ void ofApp::update(){
     
     ////////////////////////////////
     
+    //ボタンの処理
+    if(using_volume_button){
+        if(using_volume==true){
+            using_volume=false;
+        }else{
+            using_volume=true;
+        }
+    }
+    
+    if(using_fft_hue_button){
+        if(using_fft_hue==true){
+            using_fft_hue=false;
+        }else{
+            using_fft_hue=true;
+        }
+    }
     //OSC戻す
     for(int i=0;i<9;i++){
         mode_switch[i]=" ";

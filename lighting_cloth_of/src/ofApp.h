@@ -65,6 +65,9 @@ class ofApp : public ofBaseApp{
         ofVec2f cloth_image_size;
         double cloth_image_aspect_ratio=1.3424;
         ofVec2f fft_draw_size;
+        ofxButton using_volume_button;
+        ofxButton using_fft_hue_button;
+
         /////////////////////////////
     
         //色関係の変数/////////////////
