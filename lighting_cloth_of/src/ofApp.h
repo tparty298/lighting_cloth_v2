@@ -54,6 +54,7 @@ class ofApp : public ofBaseApp{
         ofxIntSlider value;
         ofxIntSlider LowPass;
         ofxIntSlider HighPass;
+        ofxFloatSlider s_r_attenu;
         ofxIntSlider s_r_multi;
         ofxIntSlider fft_hue_min;
         ofxIntSlider fft_hue_max;

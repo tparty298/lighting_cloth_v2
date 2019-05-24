@@ -9,7 +9,7 @@ void ofApp::setup(){
     //画像関連
     TParty.load("images/TParty.png");
     cloth.load("images/cloth.png");
-    cloth_image_positon.set(300,50);//cloth.pngの位置
+    cloth_image_positon.set(500,50);//cloth.pngの位置
     cloth_image_size.set(350,350*cloth_image_aspect_ratio);//cloth.pngのサイズ
     //GUI
     ofBackground(0,0,0);
@@ -20,8 +20,9 @@ void ofApp::setup(){
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
     gui.add(sound_volume_min.setup("sound_volume_min",10,0,sound_volume_500));
     gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
-    gui.add(LowPass.setup("LowPass(0~2048)",0,0,2048));
-    gui.add(HighPass.setup("HighPass(0~2048)",2048,0,2048));
+    gui.add(LowPass.setup("LowPass(0~2048)",50,0,2048));
+    gui.add(HighPass.setup("HighPass(0~2048)",500,0,2048));
+    gui.add(s_r_attenu.setup("s_r_attenu(when mic on)",1,0,1));
     gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,30));
     gui.add(fft_hue_min.setup("fft_hue_min",0,0,100));
     gui.add(fft_hue_max.setup("fft_hue_max",100,0,100));
@@ -229,9 +230,10 @@ void ofApp::draw(){
         serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
         if(using_volume==true){
             int volume_arduino_send;
-            volume_arduino_send=ofMap(buffer_sum*s_r_multi, 0, 100, 221, 240);
+            volume_arduino_send=ofMap(buffer_sum*s_r_multi*s_r_attenu, 0, 100, 221, 240);
             serialArduino[i].writeByte(Byte(volume_arduino_send));
-            ofDrawBitmapString(volume_arduino_send,200,600);
+            string msg_volume_arduino_send="volume_arduino_send: "+ofToString(Byte(volume_arduino_send));
+            ofDrawBitmapString(msg_volume_arduino_send,400,600);
         }else{
             serialArduino[i].writeByte(Byte(value));
         }
@@ -243,6 +245,36 @@ void ofApp::draw(){
     TParty.draw(1025,25,150,120);
     cloth.draw(cloth_image_positon.x,cloth_image_positon.y,cloth_image_size.x,cloth_image_size.y);
     gui.draw();//これはGUIの最後に
+    //hue1
+    ofColor c1;
+    c1.setHsb(ofMap(hue_first,0,360,0,255), 255, 255);
+    ofSetColor(c1);
+    ofFill();
+    ofRect(250,70,30,30);
+    ofSetColor(255);
+    ofNoFill();
+    ofDrawBitmapString("hue_first",250,50);
+    //hue1 end
+    //hue2
+    ofColor c2;
+    c2.setHsb(ofMap(hue_second,0,360,0,255), 255, 255);
+    ofSetColor(c2);
+    ofFill();
+    ofRect(350,70,30,30);
+    ofSetColor(255);
+    ofNoFill();
+    ofDrawBitmapString("hue_second",350,50);
+    //hue2 end
+    //fft_hue
+    ofColor c3;
+    c3.setHsb(ofMap(fft_hue,0,100,0,255), 255, 255);
+    ofSetColor(c3);
+    ofFill();
+    ofRect(300,100,30,30);
+    ofSetColor(255);
+    ofNoFill();
+    ofDrawBitmapString("fft_hue",300,100);
+    //fft_hue end
     ///////////////////////////////////
     
     
