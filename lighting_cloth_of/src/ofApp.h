@@ -67,7 +67,8 @@ class ofApp : public ofBaseApp{
         ofVec2f fft_draw_size;
         ofxButton using_volume_button;
         ofxButton using_fft_hue_button;
-
+        ofTrueTypeFont mic_on_or_off;
+        ofTrueTypeFont fft_hue_on_or_off;
         /////////////////////////////
     
         //色関係の変数/////////////////

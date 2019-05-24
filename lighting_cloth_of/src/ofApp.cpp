@@ -24,17 +24,17 @@ void ofApp::setup(){
     gui.add(HighPass.setup("HighPass(0~2048)",500,0,2048));
     gui.add(s_r_attenu.setup("s_r_attenu(when mic on)",1,0,1));
     gui.add(s_r_multi.setup("s_r_multi(when mic on)",1,1,30));
-    gui.add(fft_hue_min.setup("fft_hue_min",0,0,100));
-    gui.add(fft_hue_max.setup("fft_hue_max",100,0,100));
+    gui.add(fft_hue_min.setup("fft_hue_min",58,0,100));
+    gui.add(fft_hue_max.setup("fft_hue_max",85,0,100));
     gui.add(using_volume_button.setup("using_volume_button"));
     gui.add(using_fft_hue_button.setup("using_fft_hue_button"));
     fft_draw_size.set(400,200);
     // 描画系設定
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
-    
-    
-    
+    ofTrueTypeFont::setGlobalDpi(72);
+    mic_on_or_off.load("Impact.ttf", 18);
+    fft_hue_on_or_off.load("Impact.ttf", 18);
     // シリアル通信
     //単数の時
     /*
@@ -250,15 +250,23 @@ void ofApp::draw(){
     for(int i=0;i<3;i++){
         if(using_fft_hue==true){
             serialArduino[i].writeByte(Byte(send_fft_hue));
+            std::cout<<send_fft_hue;
+            serialArduino[i].writeByte(Byte(send_fft_hue+100));
+            std::cout<<" "<<send_fft_hue+100;
         }else{
             serialArduino[i].writeByte(Byte(hue_first_send));
+            std::cout<<hue_first_send;
+            serialArduino[i].writeByte(Byte(hue_second_send));
+            std::cout<<" "<<hue_second_send;
         }
-        serialArduino[i].writeByte(Byte(hue_second_send));
         serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
+        std::cout<<" "<<mode;
         if(using_volume==true){
             serialArduino[i].writeByte(Byte(volume_arduino_send));
+            std::cout<<" "<<volume_arduino_send<<std::endl;
         }else{
             serialArduino[i].writeByte(Byte(value));
+            std::cout<<" "<<value<<std::endl;
         }
     }
     //std::cout<<hue_first_send<<" "<<hue_second_send<<" "<<mode<<std::endl;
@@ -298,6 +306,19 @@ void ofApp::draw(){
     ofNoFill();
     ofDrawBitmapString("fft_hue",300,120);
     //fft_hue end
+    
+    //font
+    if(using_volume==true){
+      mic_on_or_off.drawString("mic->ON", 230, 220);
+    }else{
+        mic_on_or_off.drawString("mic->OFF", 230, 220);
+    }
+    
+    if(using_fft_hue==true){
+        fft_hue_on_or_off.drawString("fft_hue->ON", 230, 250);
+    }else{
+        fft_hue_on_or_off.drawString("fft_hue->OFF", 230, 250);
+    }
     ///////////////////////////////////
     
     
