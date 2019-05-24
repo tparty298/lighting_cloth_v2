@@ -208,6 +208,16 @@ void ofApp::draw(){
     ofDrawBitmapString(msg_fft_hue,200,850);
     string msg_fft_hue_bool=ofToString(using_fft_hue)+" do you use fft_hue?";
     ofDrawBitmapString(msg_fft_hue_bool,400,850);
+    
+    int volume_arduino_send;
+    volume_arduino_send=ofMap(buffer_sum*s_r_multi*s_r_attenu, 0, 100, 221, 240);
+    if(volume_arduino_send<221){
+        volume_arduino_send=221;
+    }else if(volume_arduino_send>240){
+        volume_arduino_send=240;
+    }
+    string msg_volume_arduino_send="volume_arduino_send: "+ofToString(int(volume_arduino_send));
+    ofDrawBitmapString(msg_volume_arduino_send,400,600);
     ///////////////////////////////////
     
     //シリアル通信////////////////////
@@ -229,11 +239,7 @@ void ofApp::draw(){
         serialArduino[i].writeByte(Byte(hue_second_send));
         serialArduino[i].writeByte(Byte(mode));//serialArduino.writeByte(Byte(mode));
         if(using_volume==true){
-            int volume_arduino_send;
-            volume_arduino_send=ofMap(buffer_sum*s_r_multi*s_r_attenu, 0, 100, 221, 240);
             serialArduino[i].writeByte(Byte(volume_arduino_send));
-            string msg_volume_arduino_send="volume_arduino_send: "+ofToString(Byte(volume_arduino_send));
-            ofDrawBitmapString(msg_volume_arduino_send,400,600);
         }else{
             serialArduino[i].writeByte(Byte(value));
         }
@@ -270,10 +276,10 @@ void ofApp::draw(){
     c3.setHsb(ofMap(fft_hue,0,100,0,255), 255, 255);
     ofSetColor(c3);
     ofFill();
-    ofRect(300,100,30,30);
+    ofRect(300,130,30,30);
     ofSetColor(255);
     ofNoFill();
-    ofDrawBitmapString("fft_hue",300,100);
+    ofDrawBitmapString("fft_hue",300,120);
     //fft_hue end
     ///////////////////////////////////
     
