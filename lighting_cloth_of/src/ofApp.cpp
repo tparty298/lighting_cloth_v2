@@ -18,8 +18,8 @@ void ofApp::setup(){
     gui.add(hue_second.setup("hue_second",240,0,360));
     gui.add(value.setup("value",240,221,240));
     gui.add(sound_volume_ratio.setup("sound ratio",1,0,1));
-    gui.add(sound_volume_min.setup("sound_volume_min",10,0,sound_volume_500));
-    gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
+    //gui.add(sound_volume_min.setup("sound_volume_min",10,0,sound_volume_500));
+    //gui.add(sound_volume_max.setup("sound_volume_max",300,0,sound_volume_500));
     gui.add(LowPass.setup("LowPass(0~2048)",50,0,2048));
     gui.add(HighPass.setup("HighPass(0~2048)",500,0,2048));
     gui.add(s_r_attenu.setup("s_r_attenu(when mic on)",1,0,1));
@@ -66,8 +66,6 @@ void ofApp::setup(){
         //serialArduino3.listDevices();
         OF_EXIT_APP(0);
     }
-    
-    
     
     
     
@@ -199,7 +197,7 @@ void ofApp::draw(){
     if(sound_volume_0to1>=1){
         sound_volume_0to1=1;
     }
-    ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
+    //ofDrawBitmapString(sound_volume_0to1,200,200);//音量の表示
     string msg_mode="mode: "+ofToString(mode);
     ofDrawBitmapString(msg_mode,200,500);
     string msg_using_volume = ofToString(int(using_volume)) + " do you use mic? 0:NO 1:YES";
@@ -223,7 +221,7 @@ void ofApp::draw(){
     ofNoFill();
     ofSetColor(255, 255, 255);
     fft_hue=ofMap(frequency_volume_max_ten_average, LowPass, HighPass, 1, 100);
-    string msg_fft_hue="fft_hue: "+ofToString(fft_hue);
+    string msg_fft_hue="send_fft_hue(1~100): "+ofToString(send_fft_hue);
     ofDrawBitmapString(msg_fft_hue,200,850);
     string msg_fft_hue_bool=ofToString(using_fft_hue)+" do you use fft_hue?";
     ofDrawBitmapString(msg_fft_hue_bool,400,850);
@@ -248,9 +246,9 @@ void ofApp::draw(){
     serialArduino.writeByte(Byte(value));
     */
     //複数の時
+    send_fft_hue=ofMap(fft_hue, 0, 100, fft_hue_min, fft_hue_max);
     for(int i=0;i<3;i++){
         if(using_fft_hue==true){
-            int send_fft_hue=ofMap(fft_hue, 0, 100, fft_hue_min, fft_hue_max);
             serialArduino[i].writeByte(Byte(send_fft_hue));
         }else{
             serialArduino[i].writeByte(Byte(hue_first_send));
@@ -292,7 +290,7 @@ void ofApp::draw(){
     //hue2 end
     //fft_hue
     ofColor c3;
-    c3.setHsb(ofMap(fft_hue,0,100,0,255), 255, 255);
+    c3.setHsb(ofMap(send_fft_hue,0,100,0,255), 255, 255);
     ofSetColor(c3);
     ofFill();
     ofRect(300,130,30,30);

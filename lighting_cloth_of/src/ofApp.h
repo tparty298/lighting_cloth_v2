@@ -77,6 +77,7 @@ class ofApp : public ofBaseApp{
         int hue_first_send_change_flag=0;
         int hue_second_send_change_flag=0;
         bool using_fft_hue=false;
+        int send_fft_hue=1;
         /////////////////////////////
     
         //モードのついての変数///////////
