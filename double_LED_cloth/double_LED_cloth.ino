@@ -1,7 +1,7 @@
 #include <MsTimer2.h>
 #include <Adafruit_NeoPixel.h>
 #define PININIT        10
-#define NUMPIXELS      233  //両はしは300 真ん中233
+#define NUMPIXELS      300//両はしは300 真ん中233
 #define BRIGHTNESS     150
 
 Adafruit_NeoPixel p1=Adafruit_NeoPixel(NUMPIXELS, 10, NEO_GRB + NEO_KHZ800);
@@ -61,12 +61,9 @@ void loop() {
     if(Serial.available()>0){//Serial.available()>0
       for(int i=0;i<4;i++){
         serial[i]=Serial.read();
-        //Serial.print(serial[i]);
         Serial.print(" ");
-        //Serial.print(serial[i]);
       }
       Serial.print(" ");
-      //Serial.println(value);
     }
     if(serial[3]>=221&&serial[3]<=240){
       value=map(serial[3],221,240,0,255);
@@ -115,7 +112,8 @@ void loop() {
       allLight(0,0,0);
       break;
     case 202:
-      allLight(50,0,0);
+      //allLight(20,0,0);
+      allLight(10,10,10);
       break;
     case 203:
       runningLight(color_LED_first[0],color_LED_first[1],color_LED_first[2],loopCount);

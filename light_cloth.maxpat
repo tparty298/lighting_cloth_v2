@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 510.0, 139.0, 1013.0, 834.0 ],
+		"rect" : [ 44.0, 87.0, 401.0, 331.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -93,7 +93,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "float" ],
 					"parameter_enable" : 1,
-					"patching_rect" : [ 249.0, 500.0, 39.0, 95.0 ],
+					"patching_rect" : [ 245.0, 507.5, 39.0, 95.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_type" : 0,
@@ -919,13 +919,6 @@
 					"flags" : 2
 				}
 ,
-				"live.slider[5]" : 				{
-					"srcname" : "3.ctrl.0.chan.midi",
-					"min" : 0.0,
-					"max" : 127.0,
-					"flags" : 2
-				}
-,
 				"live.button[6]" : 				{
 					"srcname" : "69.ctrl.0.chan.midi",
 					"min" : 0.0,
@@ -937,6 +930,13 @@
 					"srcname" : "37.ctrl.0.chan.midi",
 					"min" : 0.0,
 					"max" : 1.0,
+					"flags" : 2
+				}
+,
+				"live.slider[5]" : 				{
+					"srcname" : "1.ctrl.0.chan.midi",
+					"min" : 0.0,
+					"max" : 127.0,
 					"flags" : 2
 				}
 
